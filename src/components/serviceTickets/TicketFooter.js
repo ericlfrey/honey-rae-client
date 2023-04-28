@@ -19,6 +19,6 @@ export const TicketFooter = ({ ticket }) => {
           : `Completed by ${ticket?.employee?.full_name} on ${ticket.date_completed}`
       }
     </div>
-    <div> {ticketStatus()} </div>
+    <div> {ticketStatus(ticket)} </div>
   </footer>
 }
