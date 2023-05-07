@@ -39,8 +39,12 @@ export const Ticket = () => {
     updateTicket(updatedTicket).then(() => fetchTicket())
   }
 
-  const closeTicket = () => {
-    console.log(ticket);
+  const closeTicket = (evt) => {
+    const updatedTicket = {
+      ...ticket,
+      date_completed: evt.target.value
+    }
+    console.log(updatedTicket);
   }
 
   const employeePicker = () => {
