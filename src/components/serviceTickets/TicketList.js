@@ -6,8 +6,9 @@ import { getAllTickets, searchTicketsByStatus } from "../../managers/TicketManag
 import "./Tickets.css"
 
 export const TicketList = () => {
-  const [active, setActive] = useState("")
-  const [tickets, setTickets] = useState([])
+  const [active, setActive] = useState("");
+  const [tickets, setTickets] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -24,9 +25,15 @@ export const TicketList = () => {
     }
   }, [tickets])
 
+  const searchTickets = (e) => {
+    const lowerCase = e.target.value.toLowerCase();
+    setSearchInput(lowerCase)
+    filterTickets(`search_query--${lowerCase}`);
+  }
+
   const toShowOrNotToShowTheButton = () => {
     if (isStaff()) {
-      return ""
+      return <input type="text" placeholder="Search Tickets" onChange={searchTickets} />
     }
     else {
       return <button className="actions__create"
