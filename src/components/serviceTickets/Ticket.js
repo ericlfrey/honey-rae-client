@@ -45,7 +45,6 @@ export const Ticket = () => {
       employee: ticket.employee.id,
       date_completed: new Date().toISOString().split('T')[0]
     }
-    // console.log(updatedTicket);
     updateTicket(updatedTicket).then(() => fetchTicket());
   }
 
