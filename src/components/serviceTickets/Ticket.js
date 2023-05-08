@@ -16,12 +16,9 @@ export const Ticket = () => {
       .then((res) => setTicket(res))
   }
 
-  useEffect(
-    () => {
-      fetchTicket()
-    },
-    [ticketId]
-  )
+  useEffect(() => {
+    fetchTicket()
+  }, [ticketId])
 
   useEffect(
     () => {
@@ -42,16 +39,14 @@ export const Ticket = () => {
     updateTicket(updatedTicket).then(() => fetchTicket())
   }
 
-  // const ticketStatus = () => {
-  //   if (ticket.date_completed === null) {
-  //     if (ticket.employee) {
-  //       return <span className="status--in-progress">In progress</span>
-  //     }
-  //     return <span className="status--new">Unclaimed</span>
-  //   }
-  //   return <span className="status--completed">Done</span>
-  // }
-  //  I made a utility function for this. Still need to verify that it works. 
+  const closeTicket = () => {
+    const updatedTicket = {
+      ...ticket,
+      employee: ticket.employee.id,
+      date_completed: new Date().toISOString().split('T')[0]
+    }
+    updateTicket(updatedTicket).then(() => fetchTicket());
+  }
 
   const employeePicker = () => {
     if (isStaff()) {
@@ -92,7 +87,9 @@ export const Ticket = () => {
           </div>
           {
             isStaff()
-              ? <></>
+              ? ticket.date_completed === null
+                ? <button type="button" onClick={closeTicket}> Mark Done</button>
+                : <></>
               : <button onClick={deleteTicketEvent}>Delete</button>
           }
         </footer>
