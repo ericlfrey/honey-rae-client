@@ -39,12 +39,14 @@ export const Ticket = () => {
     updateTicket(updatedTicket).then(() => fetchTicket())
   }
 
-  const closeTicket = (evt) => {
+  const closeTicket = () => {
     const updatedTicket = {
       ...ticket,
-      date_completed: evt.target.value
+      employee: ticket.employee.id,
+      date_completed: new Date().toISOString().split('T')[0]
     }
-    console.log(updatedTicket);
+    // console.log(updatedTicket);
+    updateTicket(updatedTicket).then(() => fetchTicket());
   }
 
   const employeePicker = () => {
